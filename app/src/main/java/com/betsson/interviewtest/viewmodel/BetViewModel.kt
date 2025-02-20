@@ -1,5 +1,6 @@
 package com.betsson.interviewtest.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.betsson.interviewtest.data.IBetRepository
@@ -31,9 +32,18 @@ class BetViewModel(
     private fun loadBets() {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true)
-            val bets = repository.getBets()
-            _state.value = _state.value.copy(bets = bets, isLoading = false)
+
+            val bets  = repository.getBets()
+            val processedBets = postProcessBets(bets)
+
+            _state.value = _state.value.copy(bets = processedBets, isLoading = false)
         }
+    }
+    private fun postProcessBets(bets: List<Bet>): List<Bet> {
+        val betProcessor = BetProcessor()
+        //We can add more commands to the processor
+        betProcessor.addCommand(SortBySellInCommand())
+        return betProcessor.process(bets)
     }
 
     private fun calculateOdds() {
@@ -47,7 +57,10 @@ class BetViewModel(
                     odds = Odds(newOdds)
                 )
             }
-            _state.value = _state.value.copy(bets = updatedBets)
+            Log.d("BetViewModel", "Updated bets1: $updatedBets")
+            _state.value = _state.value.copy(bets = postProcessBets(updatedBets))
+            Log.d("BetViewModel", "Updated bets: ${_state.value.bets}")
+
         }
     }
 

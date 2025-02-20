@@ -37,6 +37,15 @@
         app:layout_constraintStart_toEndOf="@id/tvBetType"
         tools:text="20" />
 
+    <TextView
+        android:id="@+id/tvSellIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvOdds"
+        app:layout_constraintStart_toEndOf="@id/tvOdds"
+        tools:text="20" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

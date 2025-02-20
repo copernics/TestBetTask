@@ -22,6 +22,7 @@ class ItemAdapter(private var bets: List<Bet>) :
         val betType: TextView = view.findViewById(R.id.tvBetType)
         val odds: TextView = view.findViewById(R.id.tvOdds)
         val imageView: ImageView = view.findViewById(R.id.ivBetImage)
+        val sellIn: TextView = view.findViewById(R.id.tvSellIn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BetViewHolder {
@@ -34,6 +35,7 @@ class ItemAdapter(private var bets: List<Bet>) :
         val bet = bets[position]
         holder.betType.text = bet.type.displayName
         holder.odds.text = holder.itemView.context.getString(R.string.bet_item_odds_text, "${bet.odds.value}")
+        holder.sellIn.text = holder.itemView.context.getString(R.string.bet_item_seel_in_text, "${bet.sellIn.value}")
 
         Log.d("BetAdapter", "Loading image for bet: ${bet.image.value}")
         Glide.with(holder.itemView)

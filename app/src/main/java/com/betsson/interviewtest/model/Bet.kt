@@ -23,18 +23,14 @@ enum class BetType(val displayName: String) {
     CORNER_KICKS("Corner kicks");
 }
 
-//Added small related logic to value classes at init.
+//We can Added small related logic to value classes at init.
 @JvmInline
-value class SellInDays(val value: Int) {
-    init {
-        require(value >= 0) { "SellIn should be more than0" }
-    }
-}
+value class SellInDays(val value: Int)
 
 @JvmInline
 value class Odds(val value: Int) {
     init {
-        require(value > 0) { "Odds should have more than 0" }
+        require(value >= 0) { "Odds should be less than 0" }
     }
 }
 

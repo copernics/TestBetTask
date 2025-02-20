@@ -1,6 +1,7 @@
 package com.betsson.interviewtest
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.betsson.interviewtest.data.BetRepository
 import com.betsson.interviewtest.mvi.BetIntent
 import com.betsson.interviewtest.viewmodel.BetViewModel
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -38,9 +38,13 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         lifecycleScope.launch {
-            viewModel.state.collectLatest { state ->
+            viewModel.state.collect { state ->
                 adapter.updateItems(state.bets)
             }
+        }
+
+        findViewById<Button>(R.id.btnUpdate).setOnClickListener {
+            viewModel.updateIntent(BetIntent.CalculateOdds)
         }
 
         viewModel.updateIntent(BetIntent.LoadBets)
