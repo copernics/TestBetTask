@@ -57,10 +57,10 @@ class BetViewModel(
                     odds = Odds(newOdds)
                 )
             }
-            Log.d("BetViewModel", "Updated bets1: $updatedBets")
-            _state.value = _state.value.copy(bets = postProcessBets(updatedBets))
-            Log.d("BetViewModel", "Updated bets: ${_state.value.bets}")
 
+            val processedBets = postProcessBets(updatedBets)
+
+            _state.value = _state.value.copy(bets = processedBets)
         }
     }
 
