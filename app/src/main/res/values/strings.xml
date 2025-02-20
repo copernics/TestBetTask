@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">InterviewTest</string>
+    <string name="bet_image">Bet Image</string>
+    <string name="bet_item_odds_text">Odds: %1$s</string>
+</resources>
