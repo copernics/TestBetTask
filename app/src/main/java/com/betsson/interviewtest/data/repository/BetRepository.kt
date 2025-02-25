@@ -3,10 +3,6 @@ package com.betsson.interviewtest.data.repository
 import com.betsson.interviewtest.data.model.BetDto
 import com.betsson.interviewtest.domain.IBetRepository
 import com.betsson.interviewtest.domain.model.Bet
-import com.betsson.interviewtest.domain.model.BetType
-import com.betsson.interviewtest.domain.model.ImagePath
-import com.betsson.interviewtest.domain.model.Odds
-import com.betsson.interviewtest.domain.model.SellInDays
 
 
 class BetRepository : IBetRepository {

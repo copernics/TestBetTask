@@ -4,8 +4,6 @@ import com.betsson.interviewtest.domain.model.Bet
 import com.betsson.interviewtest.domain.model.BetType
 import com.betsson.interviewtest.domain.model.Odds
 import com.betsson.interviewtest.domain.model.SellInDays
-import com.betsson.interviewtest.domain.utils.BetProcessor
-import com.betsson.interviewtest.domain.utils.SortBySellInCommand
 
 class CalculateOddsUseCase {
     fun execute(bets: List<Bet>): List<Bet> {
