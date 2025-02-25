@@ -1,7 +1,7 @@
-package com.betsson.interviewtest.mvi
+package com.betsson.interviewtest.presentation.state
 
 
-import com.betsson.interviewtest.model.Bet
+import com.betsson.interviewtest.domain.model.Bet
 
 data class BetState(
     val bets: List<Bet> = emptyList(),

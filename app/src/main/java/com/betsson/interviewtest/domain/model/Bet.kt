@@ -1,4 +1,4 @@
-package com.betsson.interviewtest.model
+package com.betsson.interviewtest.domain.model
 //Better using data class with 'val' instead of 'var' arguments
 //Also I'm using 'value' classes for better readability
 data class Bet(
@@ -21,6 +21,9 @@ enum class BetType(val displayName: String) {
     FIRST_GOAL_SCORER("First goal scorer"),
     NUMBER_OF_FOULS("Number of fouls"),
     CORNER_KICKS("Corner kicks");
+    companion object{
+        infix fun findByName(name: String): BetType = entries.first { it.displayName == name }
+    }
 }
 
 //We can Added small related logic to value classes at init.

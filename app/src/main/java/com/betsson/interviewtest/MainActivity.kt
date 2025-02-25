@@ -1,52 +1,62 @@
 package com.betsson.interviewtest
 
 import android.os.Bundle
-import android.widget.Button
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.betsson.interviewtest.data.BetRepository
-import com.betsson.interviewtest.mvi.BetIntent
-import com.betsson.interviewtest.viewmodel.BetViewModel
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.betsson.interviewtest.presentation.intent.BetIntent
+import com.betsson.interviewtest.presentation.viewmodel.BetViewModel
+import com.betsson.interviewtest.ui.theme.AppTheme
+import org.koin.androidx.compose.koinViewModel
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
-
-    //I don't included any DI library implementation
-    @Suppress("UNCHECKED_CAST")
-    private val viewModel: BetViewModel by viewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return BetViewModel(BetRepository()) as T
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            AppTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    BetScreen(modifier = Modifier.padding(innerPadding))
+                }
             }
         }
     }
+}
 
-    private lateinit var adapter: ItemAdapter
+@Composable
+fun BetScreen(
+    modifier: Modifier = Modifier.fillMaxSize(),
+    viewModel: BetViewModel = koinViewModel()
+) {
+    val state by viewModel.state.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    Column(
+        modifier = modifier.padding(16.dp)
+    ) {
+        Button(
+            onClick = {
+                coroutineScope.launch {
+                    viewModel.updateIntent(BetIntent.CalculateOdds)
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Update Odds")
+        }
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        adapter = ItemAdapter(emptyList())
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        Spacer(modifier = Modifier.height(16.dp))
 
-        lifecycleScope.launch {
-            viewModel.state.collect { state ->
-                adapter.updateItems(state.bets)
+        LazyColumn {
+            items(state.bets) { bet ->
+                BetItem(bet)
             }
         }
-
-        findViewById<Button>(R.id.btnUpdate).setOnClickListener {
-            viewModel.updateIntent(BetIntent.CalculateOdds)
-        }
-
-        viewModel.updateIntent(BetIntent.LoadBets)
     }
 }

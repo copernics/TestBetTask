@@ -1,4 +1,4 @@
-package com.betsson.interviewtest.mvi
+package com.betsson.interviewtest.presentation.intent
 
 sealed class BetIntent {
     object LoadBets : BetIntent()

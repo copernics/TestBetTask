@@ -1,6 +1,6 @@
-package com.betsson.interviewtest.viewmodel
+package com.betsson.interviewtest.domain.utils
 
-import com.betsson.interviewtest.model.Bet
+import com.betsson.interviewtest.domain.model.Bet
 
 interface BetCommand {
     fun execute(bets: List<Bet>): List<Bet>
