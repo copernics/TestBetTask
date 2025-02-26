@@ -15,8 +15,10 @@ data class BetDto(
     val id: String = UUID.randomUUID().toString(), // Probably we should have it as a primary key
 ) {
     fun toDomainModel(): Bet {
+        val betType =
+            BetType.findByName(type) ?: throw IllegalArgumentException("Unknown bet type: $type")
         return Bet(
-            type = BetType.findByName(type),
+            type = betType,
             odds = Odds(odds),
             sellIn = SellInDays(sellIn),
             image = ImagePath(imageUrl)

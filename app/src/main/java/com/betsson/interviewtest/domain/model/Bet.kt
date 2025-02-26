@@ -22,7 +22,7 @@ enum class BetType(val displayName: String) {
     NUMBER_OF_FOULS("Number of fouls"),
     CORNER_KICKS("Corner kicks");
     companion object{
-        infix fun findByName(name: String): BetType = entries.first { it.displayName == name }
+         fun findByName(name: String): BetType? = entries.find { it.displayName == name }
     }
 }
 
