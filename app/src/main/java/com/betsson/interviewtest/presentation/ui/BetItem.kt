@@ -1,6 +1,5 @@
 package com.betsson.interviewtest
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -35,10 +35,9 @@ fun BetItem(bet: Bet) {
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Log.d("BetItem$", "Image URL: ${bet.image.value}")
             AsyncImage(
                 model = bet.image.value,
-                contentDescription = "Bet Image",
+                contentDescription = stringResource(R.string.bet_image),
                 modifier = Modifier.size(64.dp),
                 contentScale = ContentScale.Crop,
             )
@@ -46,8 +45,8 @@ fun BetItem(bet: Bet) {
 
             Column {
                 Text(text = bet.type.displayName, fontSize = 18.sp, color = Color.Black)
-                Text(text = "Odds: ${bet.odds.value}", fontSize = 14.sp, color = Color.DarkGray)
-                Text(text = "Sell In: ${bet.sellIn.value}", fontSize = 14.sp, color = Color.DarkGray)
+                Text(text = stringResource(R.string.odds, bet.odds.value), fontSize = 14.sp, color = Color.DarkGray)
+                Text(text = stringResource(R.string.sell_in, bet.sellIn.value), fontSize = 14.sp, color = Color.DarkGray)
             }
         }
     }

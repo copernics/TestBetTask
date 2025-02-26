@@ -4,4 +4,6 @@
     <string name="bet_item_odds_text">Odds: %1$s</string>
     <string name="bet_item_seel_in_text">SellIn: %1$s</string>
     <string name="update_odds">Update Odds</string>
+    <string name="odds">Odds: %1$s</string>
+    <string name="sell_in">Sell In: %1$s</string>
 </resources>

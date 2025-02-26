@@ -15,13 +15,13 @@ class BetRepository : IBetRepository {
             BetDto("First goal scorer", 0, 80, "https://i.imgur.com/Wy94Tt7.jpeg"),
             BetDto("Number of fouls", 5, 49, "https://i.imgur.com/NMLpcKj.jpeg"),
             BetDto("Corner kicks", 3, 6, "https://i.imgur.com/TiJ8y5l.jpeg"),
-        ).map {
+        ).mapNotNull {
             try {
                 it.toDomainModel()
             } catch (exception: IllegalArgumentException) {
                 Log.e("BetRepository", "Error converting BetDto to Bet", exception)
                 null
             }
-        }.filterNotNull()
+        }
     }
 }

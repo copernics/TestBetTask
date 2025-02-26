@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.betsson.interviewtest"
-        minSdk 24
+        minSdk 26
         targetSdk 35
         versionCode 1
         versionName "1.0"
@@ -53,4 +53,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.io.mock.android)
+    testImplementation(libs.io.mock)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlinx.coroutine.test)
 }

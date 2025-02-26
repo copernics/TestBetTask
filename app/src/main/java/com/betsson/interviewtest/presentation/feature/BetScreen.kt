@@ -15,8 +15,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.betsson.interviewtest.BetItem
+import com.betsson.interviewtest.R
 import com.betsson.interviewtest.presentation.intent.BetIntent
 import com.betsson.interviewtest.presentation.viewmodel.BetViewModel
 import kotlinx.coroutines.launch
@@ -41,7 +43,7 @@ fun BetScreen(
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Update Odds")
+            Text(stringResource(R.string.update_odds))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
